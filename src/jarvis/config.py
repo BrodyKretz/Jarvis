@@ -14,6 +14,8 @@ VALID_LOG_LEVELS = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}
 class Settings:
     data_dir: Path
     log_level: str
+    host: str
+    port: int
 
     @property
     def raw_dir(self) -> Path:
@@ -35,4 +37,17 @@ def load_settings() -> Settings:
             f"JARVIS_LOG_LEVEL must be one of {sorted(VALID_LOG_LEVELS)}, got {log_level!r}"
         )
 
-    return Settings(data_dir=data_dir, log_level=log_level)
+    port_raw = os.getenv("JARVIS_PORT", "8000")
+    try:
+        port = int(port_raw)
+    except ValueError:
+        raise ValueError(f"JARVIS_PORT must be an integer, got {port_raw!r}") from None
+    if not 1 <= port <= 65535:
+        raise ValueError(f"JARVIS_PORT must be between 1 and 65535, got {port}")
+
+    return Settings(
+        data_dir=data_dir,
+        log_level=log_level,
+        host=os.getenv("JARVIS_HOST", "127.0.0.1"),
+        port=port,
+    )

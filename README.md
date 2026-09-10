@@ -20,12 +20,46 @@ incident response and preparedness planning.
 
 Scaffold only.
 
-## Setup
+## Run it locally
+
+One-time setup:
 
 ```bash
+cd ~/work/Jarvis
 conda activate py312
 pip install -e ".[dev]"
 cp .env.example .env
+```
+
+Start the dev server:
+
+```bash
+jarvis-serve
+```
+
+Then open <http://localhost:8000>. The server auto-reloads on file changes,
+so leave it running while you work.
+
+| Route     | What it is                       |
+| --------- | -------------------------------- |
+| `/`       | baseline page (`web/index.html`) |
+| `/health` | JSON status + version            |
+| `/docs`   | auto-generated API docs          |
+
+Stop it with `Ctrl+C`.
+
+### Changing the port
+
+Port 8000 in use? Edit `.env`:
+
+```bash
+JARVIS_PORT=8001
+```
+
+### Tests
+
+```bash
+pytest
 ```
 
 ## Layout
@@ -33,8 +67,10 @@ cp .env.example .env
 ```
 src/jarvis/      package code
   config.py      env-backed settings
+  server.py      FastAPI app + dev server
   ingest.py      data source loaders
   cli.py         entry point
+web/             static frontend
 tests/           pytest
 data/raw/        source data (gitignored)
 data/processed/  derived data (gitignored)

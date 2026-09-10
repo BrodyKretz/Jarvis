@@ -10,13 +10,16 @@ requires-python = ">=3.12"
 dependencies = [
     "pandas",
     "python-dotenv",
+    "fastapi",
+    "uvicorn[standard]",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff"]
+dev = ["pytest", "ruff", "httpx"]
 
 [project.scripts]
 jarvis = "jarvis.cli:main"
+jarvis-serve = "jarvis.server:run"
 
 [tool.setuptools.packages.find]
 where = ["src"]
