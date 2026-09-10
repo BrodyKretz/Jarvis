@@ -64,16 +64,33 @@ JARVIS_PORT=8001
 pytest
 ```
 
+## Team
+
+| Person            | Focus                                      | Owns                                  |
+| ----------------- | ------------------------------------------ | ------------------------------------- |
+| Ben Parham        | project management, kanban                 | roadmap, board, `web/` with Cody       |
+| Houston Brummett  | Python, backend, research, responsible AI  | `ingest.py`, `data/`                   |
+| Brody Kretz       | full stack, API integration, ML            | `server.py`, `config.py`, `cli.py`     |
+| Cassidy All       | Python, modeling, simulation               | `models.py`, not built yet             |
+| Cody Coressel     | data pipelines, UX/UI, automation          | `web/`, `ingest.py` with Houston       |
+
+Backend and pipelines are Houston and Brody. Modeling is Cassidy. Data viz and
+interface are Cody and Ben.
+
 ## Layout
 
 ```
-src/jarvis/      package code
-  config.py      env-backed settings
-  server.py      FastAPI app + dev server
-  ingest.py      data source loaders
-  cli.py         entry point
-web/             static frontend
-tests/           pytest
-data/raw/        source data (gitignored)
-data/processed/  derived data (gitignored)
+src/jarvis/                                    owner
+  config.py    settings from env               Brody
+  server.py    FastAPI app + dev server        Brody
+  ingest.py    data source loaders             Houston, Cody
+  models.py    risk models, not built yet      Cassidy
+  cli.py       entry point                     Brody
+web/           static frontend                 Cody, Ben
+tests/         pytest                          author of the code under test
+data/raw/      source data (gitignored)        Houston
+data/processed derived data (gitignored)       Houston
 ```
+
+Owners are the default reviewer for that path, not the only person allowed to
+touch it.
