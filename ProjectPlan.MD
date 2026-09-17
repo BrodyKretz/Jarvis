@@ -1,6 +1,8 @@
 ##Jarvis
+9/17/26
+We've agreed to create a database: Supabase and Brody already has an account!
 
-
+We also discussed creating a more robust machine learning model to eventually incorporate an agentic AI for a participatory design aspect of our final project.
 
 
 
